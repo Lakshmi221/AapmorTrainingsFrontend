@@ -14,9 +14,9 @@
 // }
 
 
-{
-  "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["/images/*", "/static/*"]
-  }
-}
+// {
+//   "navigationFallback": {
+//     "rewrite": "/index.html",
+//     "exclude": ["/images/*", "/static/*"]
+//   }
+// }
