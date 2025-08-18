@@ -20,3 +20,12 @@
 //     "exclude": ["/images/*", "/static/*"]
 //   }
 // }
+
+
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/assets/*", "/static/*"]
+  }
+}
+
