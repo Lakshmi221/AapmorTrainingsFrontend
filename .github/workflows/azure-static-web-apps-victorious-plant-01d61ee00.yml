@@ -19,6 +19,23 @@ jobs:
         with:
           submodules: true
           lfs: false
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # ✅ Install dependencies cleanly
+      - name: Install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm cache clean --force
+          npm install
+          npm install rollup --force
+
+      - name: Build app
+        run: npm run build
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -30,7 +47,16 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
-          output_location: "build" # Built app content directory - optional
+          output_location: "dist" # Built app content directory - optional
+          skip_app_build: false 
+
+        env:
+          VITE_AUTHX_URL: ${{ secrets.VITE_AUTHX_URL }}
+          VITE_AUTHX_USERSDEPARTMENTNAMES: ${{ secrets.VITE_AUTHX_USERSDEPARTMENTNAMES }}
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
+          VITE_DOMAIN: ${{ secrets.VITE_DOMAIN }}
+          VITE_PERMISSIONS_URL: ${{ secrets.VITE_PERMISSIONS_URL }}
+          VITE_REDIRECT_URL: ${{ secrets.VITE_REDIRECT_URL }}
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
@@ -42,5 +68,6 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_PLANT_01D61EE00 }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_PEBBLE_069CD8000 }}
           action: "close"
+
